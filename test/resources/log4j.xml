@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+  <appender name="appfile" class="nablarch.integration.log.log4j.MockFileAppender">
+    <param name="File" value="./log/log4jApp.log" />
+    <param name="Append" value="true" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%c] %C %L %M %d %-5p [%t] - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="[%c] %C %L %M %d %-5p [%t] - %m%n"/>
+    </layout>
+  </appender>
+
+  <logger name="fatal">
+    <level value ="fatal" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <logger name="error">
+    <level value ="error" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <logger name="warn">
+    <level value ="warn" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <logger name="info">
+    <level value ="info" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <logger name="debug">
+    <level value ="debug" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <logger name="trace">
+    <level value ="trace" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <logger name="app">
+    <level value ="info" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </logger>
+  
+  <root>
+    <level value ="warn" />
+    <appender-ref ref="stdout" />
+    <appender-ref ref="appfile" />
+  </root>
+  
+</log4j:configuration>

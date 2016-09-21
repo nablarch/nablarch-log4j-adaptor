@@ -1,0 +1,71 @@
+// -*- mode: groovy; coding: utf-8-unix -*-
+
+
+group = 'com.nablarch.integration'
+version = '1.0.0'
+description = 'log4jによるログ出力機能の拡張実装'
+
+repositories {
+  mavenLocal()
+  maven { url "${developLibUrl}" }
+  jcenter()
+}
+
+buildscript {
+  repositories {
+    mavenLocal()
+    maven { url "${developLibUrl}" }
+    jcenter()
+  }
+  dependencies {
+    classpath "com.nablarch.dev:nablarch-gradle-plugin:${nablarchGradlePluginVersion}"
+    classpath "net.saliman:gradle-cobertura-plugin:2.2.3"
+    classpath "io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE"
+  }
+}
+apply {
+  plugin 'com.nablarch.dev.nablarch-build'
+  plugin 'com.nablarch.dev.nablarch-sonarqube'
+  plugin 'com.nablarch.dev.nablarch-maven-deploy'
+  from 'https://github.com/nablarch/nablarch-gradle-plugin/blob/develop/scripts/cobertura/cobertura-0.0.1.gradle?raw=true'
+}
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+  imports {
+    mavenBom 'com.nablarch.profile:nablarch-bom:5u6'
+  }
+  applyMavenExclusions false
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir "${projectDir}/main/java"
+    }
+  }
+  test {
+    java {
+      srcDir "${projectDir}/test/java"
+    }
+    resources {
+      srcDir "${projectDir}/test/resources"
+    }
+  }
+}
+
+dependencies {
+  compile 'com.nablarch.framework:nablarch-core'
+  compile 'log4j:log4j:1.2.16'
+  
+  testCompile 'com.nablarch.framework:nablarch-testing'
+}
+
+
+test {
+  ignoreFailures = true
+}
+
+wrapper {
+  gradleVersion = '2.4'
+}
